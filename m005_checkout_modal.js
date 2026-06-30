@@ -24,7 +24,7 @@ MataMan.openCheckout = () => {
 MataMan.confirmOrder = (total) => {
   const name = document.getElementById('name').value || '-';
   const addr = document.getElementById('addr').value || '-';
-  console.log('ส่งออเดอร์:', {name, addr, total, items: MataMan.cart.filter(i=>i.checked)});
+  saveOrderToAmin(data)
   alert(`ส่งออเดอร์ ${total}฿ ให้แอดมินแล้ว ✅`);
   MataMan.clearCart();
   document.getElementById('modalRoot').innerHTML='';
