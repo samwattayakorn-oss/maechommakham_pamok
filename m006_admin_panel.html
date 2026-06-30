@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><title>แอดมิน แม่ช่อมะขาม</title>
+<style>
+  body{background:#111;color:#fff;font-family:'Sarabun';padding:20px}
+  input,button{background:#222;color:#fff;border:1px solid #555;padding:8px;border-radius:6px}
+  table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
+  th,td{border:1px solid #444;padding:6px;text-align:center}
+  th{background:#2E8B57} td input{width:90%;background:#111;text-align:center}
+  .hide{display:none}
+</style>
+</head>
+<body>
+
+<!-- 1. หน้า Login แอดมิน -->
+<div id="loginBox">
+  <h2>เข้าสู่ระบบแอดมิน</h2>
+  <input id="adminUser" placeholder="ชื่อสมาชิก"><br><br>
+  <input id="adminPass" type="password" placeholder="รหัสผ่าน"><br><br>
+  <button onclick="adminLogin()">เข้าสู่ระบบ</button>
+  <p style="color:#aaa;font-size:12px">*Demo: user=admin pass=admin123</p>
+</div>
+
+<!-- 2. หน้า Dashboard แอดมิน -->
+<div id="adminBox" class="hide">
+  <h2>แดชบอร์ดคำสั่งซื้อ | <button onclick="logout()">ออกจากระบบ</button></h2>
+  
+  <h3>1. รายชื่อสมาชิก</h3>
+  <table id="memberTable"><tr><th>ชื่อสมาชิก</th><th>ที่อยู่</th><th>ตะกร้าเก็บ</th></tr></table>
+
+  <h3>2. ตารางคำสั่งซื้อ แก้ไขได้</h3>
+  <table id="orderTable">
+    <tr>
+      <th>ชื่อ</th><th>ที่อยู่</th><th>รายการ</th>
+      <th>ราคาสินค้า</th><th>ค่าส่ง</th><th>ส่วนลด %</th><th>ราคารวม</th>
+    </tr>
+  </table>
+  <button onclick="saveData()">บันทึกทั้งหมด</button>
+</div>
+
+<script>
+const ADMIN_PASS = 'admin123'; // เปลี่ยนรหัสตรงนี้
+let orders = JSON.parse(localStorage.getItem('mataOrders') || '[]');
+let members = JSON.parse(localStorage.getItem('mataMembers') || '[]');
+
+function adminLogin(){
+  if(document.getElementById('adminPass').value === ADMIN_PASS){
+    document.getElementById('loginBox').classList.add('hide');
+    document.getElementById('adminBox').classList.remove('hide');
+    renderTables();
+  }else{ alert('รหัสผิด'); }
+}
+
+function logout(){
+  document.getElementById('adminBox').classList.add('hide');
+  document.getElementById('loginBox').classList.remove('hide');
+}
+
+function renderTables(){
+  // 1. ตารางสมาชิก
+  document.getElementById('memberTable').innerHTML = `<tr><th>ชื่อสมาชิก</th><th>ที่อยู่</th><th>ตะกร้าเก็บ</th></tr>` +
+    members.map(m=>`<tr><td>${m.name}</td><td>${m.addr}</td><td>${m.cart?.length||0} ชิ้น</td></tr>`).join('');
+
+  // 2. ตารางออเดอร์ แบบ Excel
+  document.getElementById('orderTable').innerHTML = `<tr>
+      <th>ชื่อ</th>
