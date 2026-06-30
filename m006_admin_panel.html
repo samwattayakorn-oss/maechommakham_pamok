@@ -3,65 +3,163 @@
 <head>
 <meta charset="UTF-8"><title>แอดมิน แม่ช่อมะขาม</title>
 <style>
-  body{background:#111;color:#fff;font-family:'Sarabun';padding:20px}
-  input,button{background:#222;color:#fff;border:1px solid #555;padding:8px;border-radius:6px}
-  table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
-  th,td{border:1px solid #444;padding:6px;text-align:center}
-  th{background:#2E8B57} td input{width:90%;background:#111;text-align:center}
-  .hide{display:none}
+  body{background:#111;color:#fff;font-family:'Sarabun';padding:15px;font-size:14px}
+  input,button,select{background:#222;color:#fff;border:1px solid #555;padding:6px;border-radius:6px}
+  table{width:100%;border-collapse:collapse;margin-top:15px;font-size:12px}
+  th,td{border:1px solid #444;padding:4px;text-align:center}
+  th{background:#2E8B57;position:sticky;top:0}
+  .hide{display:none} .blink{animation:blink 1s infinite} 
+  @keyframes blink{50%{background:#DAA520;color:#000}}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;justify-content:center;align-items:center;z-index:99}
+  .box{background:#222;padding:20px;border-radius:12px;width:95%;max-width:600px;max-height:90vh;overflow:auto}
+  #orderAlert{position:fixed;bottom:20px;right:20px;padding:15px;background:red;border-radius:10px;z-index:98}
 </style>
 </head>
 <body>
 
-<!-- 1. หน้า Login แอดมิน -->
+<!-- 1. Login -->
 <div id="loginBox">
   <h2>เข้าสู่ระบบแอดมิน</h2>
-  <input id="adminUser" placeholder="ชื่อสมาชิก"><br><br>
-  <input id="adminPass" type="password" placeholder="รหัสผ่าน"><br><br>
-  <button onclick="adminLogin()">เข้าสู่ระบบ</button>
-  <p style="color:#aaa;font-size:12px">*Demo: user=admin pass=admin123</p>
+  <input id="adminUser" placeholder="user"><br><br>
+  <input id="adminPass" type="password" placeholder="pass"><br><br>
+  <button onclick="adminLogin()">เข้า</button>
+  <p style="color:#aaa;font-size:12px">Demo: admin / admin123</p>
 </div>
 
-<!-- 2. หน้า Dashboard แอดมิน -->
+<!-- 2. Dashboard -->
 <div id="adminBox" class="hide">
-  <h2>แดชบอร์ดคำสั่งซื้อ | <button onclick="logout()">ออกจากระบบ</button></h2>
-  
-  <h3>1. รายชื่อสมาชิก</h3>
-  <table id="memberTable"><tr><th>ชื่อสมาชิก</th><th>ที่อยู่</th><th>ตะกร้าเก็บ</th></tr></table>
+  <h2>แดชบอร์ด | <button onclick="logout()">ออก</button> <button onclick="copyToday()">คัดลอกวันนี้</button></h2>
 
-  <h3>2. ตารางคำสั่งซื้อ แก้ไขได้</h3>
-  <table id="orderTable">
-    <tr>
-      <th>ชื่อ</th><th>ที่อยู่</th><th>รายการ</th>
-      <th>ราคาสินค้า</th><th>ค่าส่ง</th><th>ส่วนลด %</th><th>ราคารวม</th>
-    </tr>
+  <label>หัก % การตลาด: <input id="marketPer" type="number" value="12" style="width:60px" oninput="renderOrders()"> %</label>
+
+  <h3>คำสั่งซื้อที่ยังไม่รับทราบ</h3>
+  <div id="orderTable"></div>
+
+  <h3>บัญชีรายรับผู้ผลิต</h3>
+  <table id="prodTable">
+    <tr><th>วันที่</th><th>รายการ</th><th>ค่าส่ง</th><th>ยอดสินค้า</th><th>วันที่ส่ง</th><th>ยอดหัก%</th><th>หมายเหตุ</th></tr>
   </table>
-  <button onclick="saveData()">บันทึกทั้งหมด</button>
 </div>
+
+<!-- 3. Modal รายละเอียดออเดอร์ใหม่ -->
+<div id="alertModal" class="hide modal">
+  <div class="box">
+    <h2 class="blink">🔔 มีออเดอร์ใหม่!</h2>
+    <div id="alertDetail"></div>
+    <button onclick="acknowledge()">กดรับทราบ หยุดเตือน</button>
+  </div>
+</div>
+
+<audio id="ding" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" loop></audio>
 
 <script>
-const ADMIN_PASS = 'admin123'; // เปลี่ยนรหัสตรงนี้
+const ADMIN_PASS = 'admin123';
 let orders = JSON.parse(localStorage.getItem('mataOrders') || '[]');
-let members = JSON.parse(localStorage.getItem('mataMembers') || '[]');
+let prodBook = JSON.parse(localStorage.getItem('mataProdBook') || '[]');
+let alertTimer = null;
 
 function adminLogin(){
   if(document.getElementById('adminPass').value === ADMIN_PASS){
     document.getElementById('loginBox').classList.add('hide');
     document.getElementById('adminBox').classList.remove('hide');
-    renderTables();
+    renderAll();
+    checkNewOrder(); // เริ่มเช็คเสียง
   }else{ alert('รหัสผิด'); }
 }
+function logout(){ location.reload(); }
 
-function logout(){
-  document.getElementById('adminBox').classList.add('hide');
-  document.getElementById('loginBox').classList.remove('hide');
+function checkNewOrder(){
+  const unack = orders.filter(o=>!o.ack);
+  if(unack.length>0){
+    document.getElementById('ding').play();
+    showAlert(unack[unack.length-1]); // โชว์ตัวล่าสุด
+    if(!alertTimer) alertTimer = setInterval(()=>{document.getElementById('ding').play()}, 600000); // 10 นาที
+  }
+}
+function showAlert(o){
+  const items = o.items.map(x=>`${x.name} ${x.price}฿`).join('<br>');
+  const subtotal = o.subtotal;
+  document.getElementById('alertDetail').innerHTML = `
+    <b>ชื่อ:</b> ${o.name}<br>
+    <b>ที่อยู่:</b> ${o.addr}<br>
+    <b>รายการ:</b><br>${items}<hr>
+    <b>ค่าส่ง:</b> ${o.ship} ฿<br>
+    <b>ยอดสินค้า:</b> ${subtotal} ฿<br>
+    <b>ยอดชำระรวม:</b> ${o.total} ฿<br><hr>
+    <label>ยอดหัก%เล็กๆ: <input id="prodTotal" value="${Math.ceil(subtotal - subtotal*12/100)}" style="width:100px"> ฿</label>
+  `;
+  document.getElementById('alertModal').classList.remove('hide');
+  document.getElementById('prodTotal').dataset.orderId = o.id;
+}
+function acknowledge(){
+  const id = document.getElementById('prodTotal').dataset.orderId;
+  const o = orders.find(x=>x.id==id);
+  o.ack = true;
+  document.getElementById('ding').pause();
+  clearInterval(alertTimer); alertTimer = null;
+  document.getElementById('alertModal').classList.add('hide');
+  
+  // ย้ายไปบัญชีผู้ผลิต
+  const per = Number(document.getElementById('marketPer').value);
+  const prodTotal = Number(document.getElementById('prodTotal').value);
+  prodBook.push({
+    date: new Date().toLocaleDateString('th-TH'),
+    items: o.items.map(x=>x.name).join(', '),
+    ship: o.ship,
+    subtotal: o.subtotal,
+    sendDate: '',
+    prodTotal: prodTotal,
+    note: 'รอการจัดส่ง'
+  });
+  saveAll();
+  renderAll();
 }
 
-function renderTables(){
-  // 1. ตารางสมาชิก
-  document.getElementById('memberTable').innerHTML = `<tr><th>ชื่อสมาชิก</th><th>ที่อยู่</th><th>ตะกร้าเก็บ</th></tr>` +
-    members.map(m=>`<tr><td>${m.name}</td><td>${m.addr}</td><td>${m.cart?.length||0} ชิ้น</td></tr>`).join('');
+function renderOrders(){
+  const per = Number(document.getElementById('marketPer').value);
+  document.getElementById('orderTable').innerHTML = `<table>
+    <tr><th>เวลา</th><th>ชื่อ</th><th>รวม</th><th>หัก${per}%</th><th>รับทราบ</th></tr>
+    ${orders.filter(o=>!o.ack).map(o=>`<tr>
+      <td>${new Date(o.time).toLocaleTimeString('th-TH')}</td>
+      <td>${o.name}</td>
+      <td>${o.total}</td>
+      <td>${Math.ceil(o.subtotal - o.subtotal*per/100)}</td>
+      <td><button onclick="showAlert(orders.find(x=>x.id==${o.id}))">ดู</button></td>
+    </tr>`).join('')}</table>`;
+}
 
-  // 2. ตารางออเดอร์ แบบ Excel
-  document.getElementById('orderTable').innerHTML = `<tr>
-      <th>ชื่อ</th>
+function renderProdBook(){
+  const today = new Date().toLocaleDateString('th-TH');
+  const todayRows = prodBook.filter(p=>p.date===today);
+  document.getElementById('prodTable').innerHTML = `<tr><th>วันที่</th><th>รายการ</th><th>ค่าส่ง</th><th>ยอดสินค้า</th><th>วันที่ส่ง</th><th>ยอดหัก%</th><th>หมายเหตุ</th></tr>` +
+    todayRows.map((p,i)=>`<tr>
+      <td>${p.date}</td><td>${p.items}</td><td>${p.ship}</td><td>${p.subtotal}</td>
+      <td><input value="${p.sendDate}" onchange="prodBook[${i}].sendDate=this.value;saveAll()"></td>
+      <td>${p.prodTotal}</td>
+      <td><input value="${p.note}" onchange="prodBook[${i}].note=this.value;saveAll()"></td>
+    </tr>`).join('');
+}
+
+function copyToday(){
+  const table = document.getElementById('prodTable').outerHTML;
+  navigator.clipboard.writeText(table).then(()=>alert('คัดลอกตารางวันนี้แล้ว ไปวาง Messenger ได้เลย ✅'));
+}
+
+function saveAll(){
+  localStorage.setItem('mataOrders', JSON.stringify(orders));
+  localStorage.setItem('mataProdBook', JSON.stringify(prodBook));
+}
+function renderAll(){ renderOrders(); renderProdBook(); }
+
+// ฟังก์ชันให้ m005 เรียก
+window.saveOrderToAdmin = (data) => {
+  data.id = Date.now(); // id ไม่ซ้ำ
+  data.time = Date.now();
+  data.ack = false;
+  orders.push(data);
+  saveAll();
+  checkNewOrder(); // เช็คเสียงทันที
+}
+</script>
+</body>
+</html>
