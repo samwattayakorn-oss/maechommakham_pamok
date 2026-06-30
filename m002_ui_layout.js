@@ -60,7 +60,7 @@ MataMan.pickProduct = (id) => {
   const p = MataMan.products.find(x=>x.id===id); 
   let html = `<h2>${p.name} ${p.weight}ก.</h2>`;
   for(const [k,v] of Object.entries(p.prices)){
-    html+=`<button style="margin:5px;padding:8px;background:#333;color:#fff;border-radius:6px" onclick="MataMan.addCart('${p.name} ${k}',${v},${p.weight})">${k}: ${v}฿</button>`;
+    html+=`<button style="margin:5px;padding:8px;background:#333;color:#fff;border-radius:6px" onclick="MataMan.addCart('${p.name} ;${k}',${v},${p.weight})">${k}: ${v}฿</button>`;
   };
   html+=`<br><button onclick="document.getElementById('modalRoot').innerHTML=''">ปิด</button>`;
   document.getElementById('modalRoot').innerHTML = `<div class="modal active"><div class="box">${html}</div></div>`;
