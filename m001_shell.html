@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แม่ช่อมะขาม</title>
+<style>
+  :root{--gold:#DAA520;--green:#2E8B57} body{margin:0;font-family:'Sarabun';background:#111;color:#fff;display:flex}
+  aside{width:260px;background:#1a1a1a;padding:15px;position:fixed;height:100vh;overflow-y:auto;border-right:2px solid var(--gold)}
+  main{margin-left:280px;padding:20px;width:100%} 
+  .logo{font-size:8vw;text-align:center;background:url('https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif')50%50%/cover;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 15px var(--gold))}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);justify-content:center;align-items:center;z-index:10}
+  .modal.active{display:flex} .box{background:#222;padding:20px;border-radius:12px;width:90%;max-width:500px}
+</style>
+</head>
+<body>
+  <aside id="leftPanel"></aside>
+  <main id="mainPanel"></main>
+  <div id="modalRoot"></div>
+
+<script>window.MataMan = { cart:[], products:[], totalWeight:0, ship:0 };</script>
+<script src="m003-cart-system.js"></script>
+<script src="m004-shipping-calculator.js"></script> 
+<script src="m002-ui-layout.js"></script>
+<script src="m005-checkout-modal.js"></script>
+</body>
+</html>
