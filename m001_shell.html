@@ -4,25 +4,27 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>แม่ช่อมะขาม</title>
 <style>
-  :root{--gold:#DAA520;--green:#2E8B57} body{margin:0;font-family:'Sarabun';background:#111;color:#fff;display:flex}
-  aside{width:260px;background:#1a1a1a;padding:15px;position:fixed;height:100vh;overflow-y:auto;border-right:2px solid var(--gold)}
-  main{margin-left:280px;padding:20px;width:100%} 
-  .logo{font-size:8vw;text-align:center;background:url('https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif')50%50%/cover;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 15px var(--gold))}
-  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);justify-content:center;align-items:center;z-index:10}
-  .modal.active{display:flex} .box{background:#222;padding:20px;border-radius:12px;width:90%;max-width:500px}
+ :root{--gold:#DAA520;--green:#2E8B57}
+ body{margin:0;font-family:'Sarabun';background:#111;color:#fff;display:flex}
+ aside{width:260px;background:#1a1a1a;padding:15px;position:fixed;height:100vh;overflow-y:auto;border-right:2px solid var(--gold)}
+ main{margin-left:280px;padding:20px;width:100%}
+ .logo{font-size:8vw;text-align:center;background:url('https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif')50%50%/cover;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 15px var(--gold))}
+ .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);justify-content:center;align-items:center;z-index:10}
+ .modal.active{display:flex}
+ .box{background:#222;padding:20px;border-radius:12px;width:90%;max-width:500px}
 </style>
 </head>
 <body>
-  <aside id="leftPanel"></aside>
-  <main id="mainPanel"></main>
-  <div id="modalRoot"></div>
-  <div style="position:fixed;top:10px;right:10px;z-index:10">
+ <aside id="leftPanel"></aside>
+ <main id="mainPanel"></main>
+ <div id="modalRoot"></div>
+ <div style="position:fixed;top:10px;right:10px;z-index:10">
   <span id="userStatus">ผู้เยี่ยมชม</span>
   <button onclick="showLogin()">เข้าสู่ระบบ</button>
-</div>
+ </div>
 
-<script>
-function showLogin(){
+ <script> // 1. ฟังก์ชัน Login อย่างเดียว ห้ามแตะ MataMan ตรงนี้
+ function showLogin(){
   document.getElementById('modalRoot').innerHTML = `
   <div class="modal active"><div class="box">
     <h3>สมาชิก แม่ช่อมะขาม</h3>
@@ -31,31 +33,30 @@ function showLogin(){
     <button onclick="register()">สมัคร/เข้าสู่ระบบ</button>
     <button onclick="document.getElementById('modalRoot').innerHTML=''">ปิด</button>
   </div></div>`;
-}
-function register(){
+ }
+ function register(){
   const name = document.getElementById('regName').value;
   const addr = document.getElementById('regAddr').value;
   if(!name) return alert('ใส่ชื่อ');
-  
   let members = JSON.parse(localStorage.getItem('mataMembers')||'[]');
-  if(!members.find(m=>m.name===name)){
-    members.push({name, addr, cart:[]});
-  }
+  if(!members.find(m=>m.name===name)){ members.push({name, addr, cart:[]}); }
   localStorage.setItem('mataMembers', JSON.stringify(members));
-  MataMan.currentUser = {name, addr};
+  MataMan.currentUser = {name, addr}; // ตรงนี้ MataMan ยังไม่มี แต่จะถูกเรียกหลังโหลด m003 แล้ว
   localStorage.setItem('mataUser', JSON.stringify(MataMan.currentUser));
   document.getElementById('userStatus').textContent = `สวัสดี ${name}`;
-  MataMan.loadCart(); MataMan.updateCart(); // โหลดตะกร้าของสมาชิกคนนั้น
+  MataMan.loadCart(); MataMan.updateCart();
   document.getElementById('modalRoot').innerHTML='';
-}
-// แสดงชื่อตอนเปิดเว็บ
-if(MataMan.currentUser) document.getElementById('userStatus').textContent = `สวัสดี ${MataMan.currentUser.name}`;
-</script>
+ }
+ </script>
 
-<script>window.MataMan = { cart:[], products:[], totalWeight:0, ship:0 };</script>
-<script src="m003-cart-system.js"></script>
-<script src="m004-shipping-calculator.js"></script> 
-<script src="m002-ui-layout.js"></script>
-<script src="m005-checkout-modal.js"></script>
+ <script>window.MataMan = { cart:[], products:[], totalWeight:0, ship:0 };</script> <!-- 2. สร้างตัวแปรหลัก -->
+ <script src="m003-cart-system.js"></script> <!-- 3. โหลดระบบตะกร้า -->
+ <script src="m004-shipping-calculator.js"></script>
+ <script src="m002-ui-layout.js"></script>
+ <script src="m005-checkout-modal.js"></script>
+ 
+ <script> // 4. เช็คชื่อสมาชิกตอนเปิดเว็บ ต้องไว้ท้ายสุด
+ if(MataMan.currentUser) document.getElementById('userStatus').textContent = `สวัสดี ${MataMan.currentUser.name}`;
+ </script>
 </body>
 </html>
