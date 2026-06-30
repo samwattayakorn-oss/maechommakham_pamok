@@ -44,11 +44,11 @@ MataMan.renderMain = () => {
         <p><b>เวลาเปิดร้าน:</b> จ-อา 8:00 - 19:00 น.</p>
         <div style="display:flex;gap:10px;margin-top:15px">
           <a href="https://www.facebook.com/share/1CzHxwUewL/" target="_blank" style="padding:8px 12px;background:#1877F2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">📘 Facebook</a>
-          <a href="https://m.me/ชื่อเพจแม่ช่อมะขาม" target="_blank" style="padding:8px 12px;background:#00B2FF;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">💬 Messenger</a>
+          <a href="https://m.me/1CzHxwUewL" target="_blank" style="padding:8px 12px;background:#00B2FF;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">💬 Messenger</a>
         </div>
       </div>
       <div style="flex:2;min-width:300px;height:250px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5!2d100.5!3d13.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQyJzAwLjAiTiAxMDDCsDMwJzAwLjAiRQ!5e0!3m2!1sth!2sth!4v123456" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://maps.app.goo.gl/J6hBvrwDuWqGrwDC7?g_st=ac" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
