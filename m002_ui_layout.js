@@ -48,7 +48,7 @@ MataMan.renderMain = () => {
         </div>
       </div>
       <div style="flex:2;min-width:300px;height:250px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)">
-        <iframe src="https://maps.app.goo.gl/J6hBvrwDuWqGrwDC7?g_st=ac" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a href="https://maps.app.goo.gl/o63Rdkq7FHWs2VQD6?g_st=ac" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
