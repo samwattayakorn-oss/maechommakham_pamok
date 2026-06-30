@@ -16,6 +16,41 @@
   <aside id="leftPanel"></aside>
   <main id="mainPanel"></main>
   <div id="modalRoot"></div>
+  <div style="position:fixed;top:10px;right:10px;z-index:10">
+  <span id="userStatus">ผู้เยี่ยมชม</span>
+  <button onclick="showLogin()">เข้าสู่ระบบ</button>
+</div>
+
+<script>
+function showLogin(){
+  document.getElementById('modalRoot').innerHTML = `
+  <div class="modal active"><div class="box">
+    <h3>สมาชิก แม่ช่อมะขาม</h3>
+    <input id="regName" placeholder="ชื่อสมาชิก"><br><br>
+    <input id="regAddr" placeholder="ที่อยู่"><br><br>
+    <button onclick="register()">สมัคร/เข้าสู่ระบบ</button>
+    <button onclick="document.getElementById('modalRoot').innerHTML=''">ปิด</button>
+  </div></div>`;
+}
+function register(){
+  const name = document.getElementById('regName').value;
+  const addr = document.getElementById('regAddr').value;
+  if(!name) return alert('ใส่ชื่อ');
+  
+  let members = JSON.parse(localStorage.getItem('mataMembers')||'[]');
+  if(!members.find(m=>m.name===name)){
+    members.push({name, addr, cart:[]});
+  }
+  localStorage.setItem('mataMembers', JSON.stringify(members));
+  MataMan.currentUser = {name, addr};
+  localStorage.setItem('mataUser', JSON.stringify(MataMan.currentUser));
+  document.getElementById('userStatus').textContent = `สวัสดี ${name}`;
+  MataMan.loadCart(); MataMan.updateCart(); // โหลดตะกร้าของสมาชิกคนนั้น
+  document.getElementById('modalRoot').innerHTML='';
+}
+// แสดงชื่อตอนเปิดเว็บ
+if(MataMan.currentUser) document.getElementById('userStatus').textContent = `สวัสดี ${MataMan.currentUser.name}`;
+</script>
 
 <script>window.MataMan = { cart:[], products:[], totalWeight:0, ship:0 };</script>
 <script src="m003-cart-system.js"></script>
