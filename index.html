@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><title>แม่ช่อมะขาม</title>
+<link rel="stylesheet" href="m001-ui.css">
+</head>
+<body>
+  <aside id="leftPanel"></aside>
+  <main id="mainPanel"><h1 class="logo">แม่ช่อมะขาม</h1><div id="products"></div></main>
+  <div id="modalRoot"></div> <!-- m004 จะมาใช้ตรงนี้ -->
+
+<script>
+window.MataMan = { cart:[], products:[], ship:0 }; // ศูนย์กลางข้อมูล
+</script>
+<script src="m002-cart.js"></script>
+<script src="m003-shipping.js"></script> 
+<script src="m001-ui.js"></script>
+<script src="m004-checkout.js"></script>
+</body>
+</html>
