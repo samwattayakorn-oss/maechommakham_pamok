@@ -3,8 +3,8 @@ MataMan.renderLeft = () => {
   document.getElementById('leftPanel').innerHTML = `
     <h3>คำสั่งซื้อ</h3>
     <button onclick="MataMan.clearCart()">1. ล้างตะกร้า</button>
-    <button onclick="MataMan.openCheckout()">2. ไปชำระเงิน</button>
-    
+    <button onclick="MataMan.showCheckout()">2. ไปชำระเงิน</button>
+  
     <h3>แสดงผล</h3>
     <div class="sum-box">
       สินค้า: ${MataMan.cart.filter(i=>i.checked).length} ชิ้น<br>
