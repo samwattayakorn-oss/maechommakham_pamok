@@ -25,10 +25,45 @@ MataMan.renderLeft = () => {
   `;
 }
 
-MataMan.renderMain = () => {
+MataMan.renderMain = () => { 
   document.getElementById('mainPanel').innerHTML = `
-    <h1 class="logo">แม่ช่อมะขาม</h1>
-    <div class="products" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px">
+  <h1 class="logo">แม่ช่อมะขาม</h1>
+  <div class="products" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px">
+  ${MataMan.products.map(p=>`
+    <div class="card" style="background:#222;border-radius:12px;padding:10px;cursor:pointer" onclick="MataMan.pickProduct(${p.id})">
+     <img src="${p.img}" style="width:100%;border-radius:8px"><div>${p.name}</div> 
+    </div>`).join('')}
+  </div>
+
+  <!-- [เพิ่มใหม่] กล่องข้อมูลผู้ขาย -->
+  <div style="margin-top:40px;padding:20px;background:#1a1a1a;border-radius:12px;border:1px solid var(--gold)">
+    <h2 style="color:var(--gold);margin-top:0">ติดต่อร้านแม่ช่อมะขาม</h2>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:start">
+      <!-- ซ้าย: ที่อยู่ + เบอร์ + Social -->
+      <div style="flex:1;min-width:280px">
+        <p><b>ที่อยู่:</b> 123/4 หมู่ 5 ต.บางมะขาม อ.เมือง จ.ราชบุรี 70000</p> <!-- [แก้] ใส่ที่อยู่จริง -->
+        <p><b>เบอร์โทร:</b> 081-XXX-XXXX</p> <!-- [แก้] ใส่เบอร์จริง -->
+        <p><b>เวลาเปิดร้าน:</b> จ-ศ 8:00 - 17:00 น.</p>
+        
+        <div style="display:flex;gap:10px;margin-top:15px">
+          <!-- Facebook Page -->
+          <a href="https://www.facebook.com/ชื่อเพจแม่ช่อมะขาม" target="_blank" style="padding:8px 12px;background:#1877F2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">📘 Facebook</a>
+          <!-- Messenger -->
+          <a href="https://m.me/ชื่อเพจแม่ช่อมะขาม" target="_blank" style="padding:8px 12px;background:#00B2FF;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">💬 Messenger</a>
+        </div>
+        <p style="font-size:12px;color:#aaa;margin-top:8px">ทักแชทได้เลย ตอบเร็ว</p>
+      </div>
+      <!-- ขวา: Google Map -->
+      <div style="flex:2;min-width:300px;height:250px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5!2d100.5!3d13.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQyJzAwLjAiTiAxMDDCsDMwJzAwLjAiRQ!5e0!3m2!1sth!2sth!4v123456" 
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+  `;
+}
       ${MataMan.products.map(p=>`
         <div class="card" style="background:#222;border-radius:12px;padding:10px;cursor:pointer" onclick="MataMan.pickProduct(${p.id})">
           <img src="${p.img}" style="width:100%;border-radius:8px"><div>${p.name}</div>
