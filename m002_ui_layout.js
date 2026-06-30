@@ -22,7 +22,7 @@ MataMan.renderLeft = () => {
   <h3>หมวดสินค้า</h3> 
   <div id="menu">${MataMan.products.map(p=>`<button onclick="MataMan.filter(${p.id})">${p.name}</button>`).join('')}</div> 
   `; 
-}; // [สำคัญ] ปิดด้วย ; 
+}; 
 
 MataMan.renderMain = () => { 
   document.getElementById('mainPanel').innerHTML = `
@@ -34,26 +34,27 @@ MataMan.renderMain = () => {
     </div>`).join('')}
   </div>
 
-  <!-- [กล่องติดต่อ] Facebook + Messenger + Map -->
+  <!-- [กล่องติดต่อ] Facebook + Messenger + ปุ่ม Map -->
   <div style="margin-top:40px;padding:20px;background:#1a1a1a;border-radius:12px;border:1px solid var(--gold)">
     <h2 style="color:var(--gold);margin-top:0">ติดต่อร้านแม่ช่อมะขาม</h2>
     <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:start">
       <div style="flex:1;min-width:280px">
-        <p><b>ที่อยู่:</b> 833/ข หมู่ 2 ต.ป่าโมก อ.ป่าโมก จ.อ่าทอง 14130</p> 
+        <p><b>ที่อยู่:</b> 833/ข หมู่ 2 ต.ป่าโมก อ.ป่าโมก จ.อ่างทอง 14130</p> 
         <p><b>เบอร์โทร:</b> 062-410-0661 , 086-620-0548</p> 
         <p><b>เวลาเปิดร้าน:</b> จ-อา 8:00 - 19:00 น.</p>
-        <div style="display:flex;gap:10px;margin-top:15px">
+        <div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap">
           <a href="https://www.facebook.com/share/1CzHxwUewL/" target="_blank" style="padding:8px 12px;background:#1877F2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">📘 Facebook</a>
           <a href="https://m.me/1CzHxwUewL" target="_blank" style="padding:8px 12px;background:#00B2FF;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">💬 Messenger</a>
         </div>
       </div>
-      <div style="flex:2;min-width:300px;height:250px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)">
-        <a href="https://maps.app.goo.gl/o63Rdkq7FHWs2VQD6?g_st=ac" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <!-- [แก้แล้ว] เปลี่ยนจาก iframe เป็นปุ่ม -->
+      <div style="flex:2;min-width:300px;height:250px;border-radius:8px;overflow:hidden;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;background:#222">
+        <a href="https://maps.app.goo.gl/o63Rdkq7FHWs2VQD6" target="_blank" style="padding:15px 25px;background:var(--gold);color:#000;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;text-align:center">📍 ดูแผนที่ร้าน<br>ร้านช่อมะขาม ป่าโมก</a>
       </div>
     </div>
   </div>
   `;
-}; // [สำคัญ] ปิดด้วย ;
+}; 
 
 MataMan.pickProduct = (id) => { 
   const p = MataMan.products.find(x=>x.id===id); 
@@ -63,9 +64,9 @@ MataMan.pickProduct = (id) => {
   }
   html+=`<br><button onclick="document.getElementById('modalRoot').innerHTML=''">ปิด</button>`;
   document.getElementById('modalRoot').innerHTML = `<div class="modal active"><div class="box">${html}</div></div>`;
-}; // [สำคัญ] ปิดด้วย ;
+}; 
 
-MataMan.filter = (id) => { /* ทำกรองสินค้า */ }; // [สำคัญ] ปิดด้วย ;
+MataMan.filter = (id) => { /* ทำกรองสินค้า */ }; 
 
 MataMan.renderLeft(); 
-MataMan.renderMain(); // [จบไฟล์ตรงนี้] ห้ามมีอะไรต่อ
+MataMan.renderMain();
