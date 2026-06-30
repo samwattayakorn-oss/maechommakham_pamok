@@ -39,11 +39,11 @@ MataMan.renderMain = () => {
     <h2 style="color:var(--gold);margin-top:0">ติดต่อร้านแม่ช่อมะขาม</h2>
     <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:start">
       <div style="flex:1;min-width:280px">
-        <p><b>ที่อยู่:</b> 123/4 หมู่ 5 ต.บางมะขาม อ.เมือง จ.ราชบุรี 70000</p> 
-        <p><b>เบอร์โทร:</b> 081-XXX-XXXX</p> 
-        <p><b>เวลาเปิดร้าน:</b> จ-ศ 8:00 - 17:00 น.</p>
+        <p><b>ที่อยู่:</b> 834/ข หมู่ 3 ต.ป่าโมก อ.ป่าโมก จ.อ่าทอง 14130</p> 
+        <p><b>เบอร์โทร:</b> 062-410-0661 , 086-620-0548</p> 
+        <p><b>เวลาเปิดร้าน:</b> จ-อา 8:00 - 19:00 น.</p>
         <div style="display:flex;gap:10px;margin-top:15px">
-          <a href="https://www.facebook.com/ชื่อเพจแม่ช่อมะขาม" target="_blank" style="padding:8px 12px;background:#1877F2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">📘 Facebook</a>
+          <a href="https://www.facebook.com/share/1CzHxwUewL/" target="_blank" style="padding:8px 12px;background:#1877F2;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">📘 Facebook</a>
           <a href="https://m.me/ชื่อเพจแม่ช่อมะขาม" target="_blank" style="padding:8px 12px;background:#00B2FF;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">💬 Messenger</a>
         </div>
       </div>
