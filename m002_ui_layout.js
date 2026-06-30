@@ -39,7 +39,7 @@ MataMan.renderMain = () => {
     <h2 style="color:var(--gold);margin-top:0">ติดต่อร้านแม่ช่อมะขาม</h2>
     <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:start">
       <div style="flex:1;min-width:280px">
-        <p><b>ที่อยู่:</b> 834/ข หมู่ 3 ต.ป่าโมก อ.ป่าโมก จ.อ่าทอง 14130</p> 
+        <p><b>ที่อยู่:</b> 833/ข หมู่ 2 ต.ป่าโมก อ.ป่าโมก จ.อ่าทอง 14130</p> 
         <p><b>เบอร์โทร:</b> 062-410-0661 , 086-620-0548</p> 
         <p><b>เวลาเปิดร้าน:</b> จ-อา 8:00 - 19:00 น.</p>
         <div style="display:flex;gap:10px;margin-top:15px">
