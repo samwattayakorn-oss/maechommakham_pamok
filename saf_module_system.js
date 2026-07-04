@@ -29,4 +29,25 @@ function typeText(el, text, speed = 80) {
 </script>
 ========================================
 
-  
+ <script>
+function scramble(el, finalText) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+  let iterations = 0;
+
+  const interval = setInterval(() => {
+    el.innerText = finalText
+      .split("")
+      .map((_, i) => {
+        if (i < iterations) return finalText[i];
+        return chars[Math.floor(Math.random() * chars.length)];
+      })
+      .join("");
+
+    if (iterations >= finalText.length) {
+      clearInterval(interval);
+    }
+
+    iterations += 1 / 3;
+  }, 30);
+}
+</script> 
