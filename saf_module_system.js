@@ -10,3 +10,23 @@ function animateCard(el) {
   }, 100);
 }
 </script>
+========================================
+<script>
+function typeText(el, text, speed = 80) {
+  let i = 0;
+  el.innerHTML = "";
+
+  function typing() {
+    if (i < text.length) {
+      el.innerHTML += text[i];
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+
+  typing();
+}
+</script>
+========================================
+
+  
