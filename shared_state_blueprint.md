@@ -5,3 +5,26 @@ Shared_State_Blueprint.md
 กำลังประมวลผล
 พักการทำงาน
 รอการยืนยัน
+
+Shared_State_Blueprint.md
+ภายในประกอบด้วย
+
+Shared_State
+
+│
+
+├── State_ID
+├── State_Name
+├── State_Type
+├── State_Status
+├── State_Level
+├── State_Source
+├── State_Target
+├── State_Value
+├── State_Condition
+├── State_Transition
+├── State_Event
+├── State_Result
+├── State_Relation
+├── State_Time
+└── State_Note
