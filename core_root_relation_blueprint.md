@@ -1,18 +1,92 @@
-Core_Root_Relation/
+# Core Root Relation Blueprint
 
-├── Core_Root_Relation_Blueprint.md
-│
-├── Core_Root_Relation_Definition.md
-├── Core_Root_Relation_Identity.md
-├── Core_Root_Relation_Type.md
-├── Core_Root_Relation_Level.md
-├── Core_Root_Relation_Source.md
-├── Core_Root_Relation_Target.md
-├── Core_Root_Relation_Direction.md
-├── Core_Root_Relation_Dependency.md
-├── Core_Root_Relation_Condition.md
-├── Core_Root_Relation_Rule.md
-├── Core_Root_Relation_Validation.md
-├── Core_Root_Relation_Result.md
-├── Core_Root_Relation_Feedback.md
-└── Core_Root_Relation_Evolution.md
+## 1. Identity
+- Name
+- Version
+- Status
+
+## 2. Purpose
+กำหนดหลักการของ "ความสัมพันธ์" ที่เกิดขึ้นภายใน SAFE
+เพื่อให้ทุกองค์ประกอบสามารถเชื่อมโยงกันได้อย่างมีความหมาย
+
+## 3. Scope
+- ความสัมพันธ์ระหว่างข้อมูล
+- ความสัมพันธ์ระหว่างเงื่อนไข
+- ความสัมพันธ์ระหว่างโมดูล
+- ความสัมพันธ์ระหว่างกระบวนการ
+- ความสัมพันธ์ระหว่างผลลัพธ์
+
+## 4. Responsibility
+- นิยามความสัมพันธ์
+- กำหนดทิศทางการเชื่อมโยง
+- ตรวจสอบ Dependency
+- ตรวจสอบความถูกต้องของการเชื่อมโยง
+
+## 5. Input
+- Meaning
+- Condition
+- Structure
+- Shared Data
+
+## 6. Process
+Analyze
+→ Connect
+→ Validate
+→ Build Relation
+→ Output
+
+## 7. Output
+- Relation Graph
+- Relation Data
+- Relation Rule
+- Relation Result
+
+## 8. Shared Data
+ใช้ร่วมกับ Shared Layer
+
+## 9. Relation
+เชื่อมโยงกับทุก Blueprint
+
+## 10. Dependency
+Meaning
+Condition
+Structure
+
+## 11. Component
+Definition
+Identity
+Type
+Level
+Source
+Target
+Direction
+Path
+Dependency
+Strength
+Condition
+Rule
+Validation
+Result
+Feedback
+Evolution
+
+## 12. Validation
+ตรวจสอบความสมบูรณ์ของความสัมพันธ์
+
+## 13. Error Handling
+จัดการ Relation ที่ผิดหรือขาดหาย
+
+## 14. Security
+สิทธิ์ในการสร้าง แก้ไข ลบ Relation
+
+## 15. Configuration
+กำหนดชนิดและรูปแบบของ Relation
+
+## 16. Future Expansion
+รองรับ Knowledge Graph
+Semantic Relation
+AI Relation
+Ontology
+
+## 17. Change Log
+บันทึกการเปลี่ยนแปลง
