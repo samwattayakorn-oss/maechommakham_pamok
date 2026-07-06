@@ -5,13 +5,16 @@ Core
 
 │
 
-├── Meaning
-├── Condition
-├── Relation
-├── Structure
+├── Core_Root
+│     │
+│     ├── Meaning
+│     ├── Condition
+│     ├── Relation
+│     └── Structure
+│
 ├── Process
-├── Analysis
 ├── System
+├── Analysis
 ├── Result
 ├── Feedback
 ├── Evolution
