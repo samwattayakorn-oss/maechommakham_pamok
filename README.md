@@ -15,28 +15,51 @@
 
 ## หลักการ
 
-Condition (เงื่อนไข) = เงื่อนไข
-
-↓
-
-Relation (ความสัมพันธ์) = ความสัมพันธ์
-
-↓
-
-Structure (โครงสร้าง) = โครงสร้าง
-
-↓
-
-Process (กระบวนการ) = กระบวนการ
-
-↓
-
-System (ระบบ) = ระบบ
-
-↓
-
-Result (ผลลัพธ์) = ผลลัพธ์
-
-↓
-
-Evolution (วิวัฒนาการ) = การพัฒนาอย่างต่อเนื่อง
+SAFE/
+│
+├── README.md
+├── LICENSE
+├── CHANGELOG.md
+│
+├── Blueprint/
+│   │
+│   ├── Blueprint_Template.md
+│   ├── Root_Blueprint_Template.md
+│   ├── Module_Blueprint_Template.md
+│   ├── Data_Blueprint_Template.md
+│   ├── Event_Blueprint_Template.md
+│   ├── Config_Blueprint_Template.md
+│   └── Process_Blueprint_Template.md
+│
+├── Core/
+│   │
+│   ├── Core_Blueprint.md
+│   │
+│   ├── Core_Root_Meaning_Blueprint.md
+│   ├── Core_Root_Condition_Blueprint.md
+│   ├── Core_Root_Relation_Blueprint.md
+│   ├── Core_Root_Structure_Blueprint.md
+│   │
+│   ├── Core_Process_Blueprint.md
+│   ├── Core_System_Blueprint.md
+│   ├── Core_Analysis_Blueprint.md
+│   ├── Core_Result_Blueprint.md
+│   ├── Core_Feedback_Blueprint.md
+│   ├── Core_Evolution_Blueprint.md
+│   │
+│   ├── Core_Validation_Blueprint.md
+│   ├── Core_Balance_Blueprint.md
+│   ├── Core_Optimization_Blueprint.md
+│   ├── Core_Knowledge_Blueprint.md
+│   └── Core_Sharing_Blueprint.md
+│
+├── Shared/
+├── Relation/
+├── Workflow/
+├── Business/
+├── System/
+├── Module/
+├── Database/
+├── Config/
+├── API/
+└── Document/
