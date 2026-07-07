@@ -1,0 +1,10 @@
+Core_Root_Structure_Status/
+
+├── Status_Current
+├── Status_Code
+├── Status_Level
+├── Status_Reason
+├── Status_Action
+├── Status_Result
+├── Status_Time
+└── Status_Note
