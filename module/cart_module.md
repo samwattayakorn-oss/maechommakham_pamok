@@ -1,28 +1,37 @@
-# Cart Module
+# Order Module
 
 ## Purpose
-จัดการตะกร้าสินค้า
+จัดการคำสั่งซื้อ
 
 ## Responsibility
-- เพิ่มสินค้า
-- ลบสินค้า
-- แก้ไขจำนวนสินค้า
-- คำนวณราคา
-- คำนวณน้ำหนัก
+- สร้างคำสั่งซื้อ
+- ยกเลิกคำสั่งซื้อ
+- ติดตามสถานะ
+- สรุปรายการสินค้า
 
 ## Relation
-- Product Module
-- Order Module
-- Promotion Module
+- Cart Module
+- Payment Module
+- Shipping Module
+- Inventory Module
 - Member Module
 
 ## Event
-- CART_ADD
-- CART_UPDATE
-- CART_REMOVE
-- CART_CLEAR
+- ORDER_CREATE
+- ORDER_UPDATE
+- ORDER_CANCEL
+- ORDER_COMPLETE
+
+## Status
+- Draft
+- Pending
+- Paid
+- Shipping
+- Delivered
+- Cancel
 
 ## Future Expansion
-- Save Cart
-- Shared Cart
-- Wishlist
+- Partial Payment
+- Partial Shipping
+- Return Order
+- Refund
