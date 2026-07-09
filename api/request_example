@@ -1,0 +1,9 @@
+{
+  "product_name": "มะขามแก้ว",
+  "category_id": "uuid",
+  "product_price": 59.00,
+  "product_stock": 100,
+  "product_weight": 0.20,
+  "product_description": "มะขามแก้วสูตรดั้งเดิม",
+  "product_status": "active"
+}
