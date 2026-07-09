@@ -15,8 +15,14 @@
 - STOCK_OUT
 - STOCK_RESERVE
 - STOCK_RETURN
+- STOCK_ADJUST
 
 ## Relation
 - Product Module
 - Order Module
 - Shipping Module
+
+## Future Expansion
+- Multi Warehouse
+- Batch Stock
+- Expire Date
