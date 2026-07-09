@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "message": "Create Product Success",
+  "data": {
+    "product_id": "uuid"
+  }
+}
