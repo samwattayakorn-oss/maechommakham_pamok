@@ -1,0 +1,9 @@
+GET     /api/cart
+GET     /api/cart/{id}
+
+POST    /api/cart
+PUT     /api/cart/{id}
+
+DELETE  /api/cart/{id}
+
+POST    /api/cart/checkout
